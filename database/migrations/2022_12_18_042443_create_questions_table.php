@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('quizzes', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('course_id')->nullable();
-            $table->string('title', 255);
-            $table->string('slug', 510)->unique();
-            $table->string('lesson_link', 255)->nullable();
+            $table->uuid('quiz_id')->nullable();
+            $table->text('question');
 
             $table->timestamps();
 
-            $table->foreign('course_id')->references('id')->on('courses')->cascadeOnDelete();
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->cascadeOnDelete();
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lessons');
+        Schema::dropIfExists('questions');
     }
 };
