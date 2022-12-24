@@ -30,4 +30,12 @@ class Course extends UuidModel
     {
         return $this->hasMany(Quiz::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'course_tags');
+    }
 }

@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 
 class QuizResource extends Resource
 {
@@ -20,6 +21,8 @@ class QuizResource extends Resource
 
     protected static ?string $navigationLabel = 'Quizzes';
 
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -28,7 +31,10 @@ class QuizResource extends Resource
                     ->required(),
                 TextInput::make('lesson_link'),
                 Select::make('course')
-                    ->relationship('course', 'title')
+                    ->relationship('course', 'title'),
+                Select::make('tags')
+                    ->multiple()
+                    ->relationship('tags', 'name'),
             ]);
     }
 
@@ -36,14 +42,19 @@ class QuizResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
+                TextColumn::make('title')
+                    ->searchable(),
                 TextColumn::make('slug')->limit(10),
                 TextColumn::make('course.title')->limit(20),
+                TextColumn::make('tags.name')
+                    ->limit(10),
                 TextColumn::make('questions_count')->counts('questions'),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make('tags')
+                    ->multiple()
+                    ->relationship('tags', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

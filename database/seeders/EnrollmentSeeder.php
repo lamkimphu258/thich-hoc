@@ -5,10 +5,8 @@ namespace Database\Seeders;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Trainee;
-use Database\Factories\EnrollmentFactory;
 use Database\Seeders\Traits\HasTruncate;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class EnrollmentSeeder extends Seeder
 {
@@ -19,7 +17,7 @@ class EnrollmentSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->truncate('enrollments');
 
