@@ -22,7 +22,7 @@ rollback:
 	$(SAIL) artisan migrate:rollback $(options)
 
 seed:
-	$(SAIL) artisan db:seed --class=AnswerSeeder
+	$(SAIL) artisan db:seed --class=TagSeeder
 
 admin: 
 	$(SAIL) artisan make:filament-user -n --name=$(ADMIN_NAME) --email=$(ADMIN_EMAIL) --password=$(ADMIN_PASSWORD)

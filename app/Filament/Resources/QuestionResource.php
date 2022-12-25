@@ -29,7 +29,8 @@ class QuestionResource extends Resource
                 RichEditor::make('question')
                     ->required(),
                 Select::make('quiz')
-                    ->relationship('quiz', 'title'),
+                    ->relationship('quiz', 'title')
+                    ->searchable(),
                 Repeater::make('answers')
                     ->relationship()
                     ->schema([

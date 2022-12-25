@@ -36,6 +36,9 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         $this->clearOldData();
+        $this->call([
+            AnswerSeeder::class
+        ]);
 
         $this->seedTags();
         $tags = Tag::all();

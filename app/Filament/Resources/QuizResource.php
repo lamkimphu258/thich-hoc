@@ -31,7 +31,8 @@ class QuizResource extends Resource
                     ->required(),
                 TextInput::make('lesson_link'),
                 Select::make('course')
-                    ->relationship('course', 'title'),
+                    ->relationship('course', 'title')
+                    ->searchable(),
                 Select::make('tags')
                     ->multiple()
                     ->relationship('tags', 'name'),

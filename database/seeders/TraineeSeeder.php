@@ -10,17 +10,25 @@ class TraineeSeeder extends Seeder
 {
     use HasTruncate;
 
+    const TRAINEE_QUANTITY = 10_000;
+
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->truncate('trainees');
 
-        Trainee::factory()
-            ->count(10)
-            ->create();
+        $bar = $this->command->getOutput()->createProgressBar(self::TRAINEE_QUANTITY);
+        $bar->start();
+        for ($i = 0; $i < self::TRAINEE_QUANTITY; $i++) {
+            Trainee::factory()
+                ->create();
+            $bar->advance();
+        }
+        $bar->finish();
+        $this->command->getOutput()->newLine();
     }
 }

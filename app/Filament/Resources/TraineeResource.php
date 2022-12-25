@@ -4,11 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\TraineeResource\Pages;
 use App\Models\Trainee;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -24,16 +26,19 @@ class TraineeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
                     ->email()
                     ->unique()
                     ->required(),
-                Forms\Components\TextInput::make('username')
+                TextInput::make('username')
                     ->unique()
                     ->required(),
-                Forms\Components\TextInput::make('password')
+                TextInput::make('password')
                     ->password()
                     ->required(),
+                Select::make('courses')
+                    ->multiple()
+                    ->relationship('courses', 'title'),
             ]);
     }
 
@@ -41,11 +46,13 @@ class TraineeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('username')
+                TextColumn::make('username')
                     ->sortable(),
+                TextColumn::make('courses_count')
+                    ->counts('courses'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

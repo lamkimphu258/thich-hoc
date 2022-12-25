@@ -1,6 +1,8 @@
 <?php
 
-use App\Filament\Resources\TraineeResource\Widgets\TraineeChartWidget;
+use App\Filament\Resources\CourseResource\Widgets\CourseLineChartWidget;
+use App\Filament\Resources\QuizResource\Widgets\QuizLineChartWidget;
+use App\Filament\Resources\TraineeResource\Widgets\TraineeLineChartWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
@@ -139,7 +141,9 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-            TraineeChartWidget::class,
+            TraineeLineChartWidget::class,
+            CourseLineChartWidget::class,
+            QuizLineChartWidget::class,
         ],
     ],
 

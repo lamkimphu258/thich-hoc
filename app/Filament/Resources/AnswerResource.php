@@ -27,7 +27,8 @@ class AnswerResource extends Resource
                 TextInput::make('answer')
                     ->required(),
                 Select::make('question')
-                    ->relationship('question', 'question'),
+                    ->relationship('question', 'question')
+                    ->searchable(),
             ]);
     }
 
@@ -36,7 +37,8 @@ class AnswerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('answer')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('question.question')
                     ->limit(20)
                     ->sortable(),

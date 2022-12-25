@@ -31,10 +31,12 @@ class EnrollmentSeeder extends Seeder
 
         foreach ($trainees as $trainee) {
             foreach ($courses as $course) {
-                Enrollment::factory()->create([
-                    'trainee_id' => $trainee->id,
-                    'course_id' => $course->id
-                ]);
+                if (random_int(0, 1)) {
+                    Enrollment::factory()->create([
+                        'trainee_id' => $trainee->id,
+                        'course_id' => $course->id
+                    ]);
+                }
             }
         }
     }

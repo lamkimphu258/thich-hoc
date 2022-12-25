@@ -30,9 +30,6 @@ class CourseResource extends Resource
                     ->required(),
                 TextInput::make('description')
                     ->required(),
-                Select::make('enrollments')
-                    ->multiple()
-                    ->relationship('trainees', 'email'),
                 Select::make('course_tags')
                     ->multiple()
                     ->relationship('tags', 'name'),
@@ -44,12 +41,15 @@ class CourseResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
+                    ->limit(20)
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('slug')
                     ->limit(10),
                 TextColumn::make('tags.name')
                     ->limit(10),
+                TextColumn::make('trainees_count')
+                    ->counts('trainees'),
                 TextColumn::make('quizzes_count')
                     ->counts('quizzes'),
             ])

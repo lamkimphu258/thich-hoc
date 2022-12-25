@@ -15,7 +15,7 @@ class CourseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->truncate('courses');
         Course::factory()

@@ -19,7 +19,7 @@ class AnswerSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->truncate('questions');
+        $this->truncate('answers');
 
         $this->call([
             QuestionSeeder::class,
