@@ -1,3 +1,26 @@
+.PHONY = up down restart build rollback seed admin init
+
+# Production
+PRODUCTION_FILE = "production.yml"
+
+up-prod:
+	docker-compose -f production.yml up -d
+
+down-prod:
+	docker-compose -f production.yml down 
+
+restart-prod: down-prod up-prod
+
+build-prod:
+	docker-compose -f $(PRODUCTION_FILE) build $(options)
+
+build-prod-no-cache: 
+	$(MAKE) build-prod options="--no-cache"
+
+exec-app-prod:
+	docker-compose -f $(PRODUCTION_FILE) exec app sh
+
+# Dev
 SAIL=./vendor/bin/sail
 
 ADMIN_NAME=admin
@@ -27,5 +50,5 @@ seed:
 admin: 
 	$(SAIL) artisan make:filament-user -n --name=$(ADMIN_NAME) --email=$(ADMIN_EMAIL) --password=$(ADMIN_PASSWORD)
 
-make init:
+init:
 	migrate && admin && seed
