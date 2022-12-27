@@ -52,3 +52,6 @@ admin:
 
 init:
 	migrate && admin && seed
+
+test-workflow:
+	act push --secret-file ../secret/thich_hoc.secrets
