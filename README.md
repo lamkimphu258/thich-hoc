@@ -14,3 +14,15 @@ This is open source of website www.thichhoc.com. Feel free to ask me a question 
 -   Run `make migration`
 -   Run `make admin`. Default name is `admin`, email is `admin@email.com` and password is `password123`. Pass `ADMIN_NAME`, `ADMIN_EMAIL` and `ADMIN_PASSWORD` to change name, email and password.
 -   Access port of application and start using it
+
+# TODO
+
+-   Add landing page
+-   Add signup page
+-   Add login page
+-   Add logout
+-   Add profile page
+-   Add course list page
+-   Add course detail page: have list all quiz belongs to course
+-   Add quiz list page
+-   Add quiz detail page: have list of all question belongs to quiz, user can do quiz in here
