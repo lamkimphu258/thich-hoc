@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'trainee' => [
+            'driver' => 'session',
+            'provider' => 'trainees',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'trainees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Trainee::class,
         ],
 
         // 'users' => [
@@ -93,6 +101,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'trainees' => [
+            'provider' => 'trainees',
+            'table' => 'trainee_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
     ],
 
     /*

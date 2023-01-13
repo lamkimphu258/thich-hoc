@@ -10,7 +10,7 @@ class Navbar extends Component
 
     public array $items = [
         'login' => 'Login',
-        'signup' => 'Sign up',
+        'register' => 'Sign up',
     ];
 
     public function render()

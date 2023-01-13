@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('trainees', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('email', 255)->unique();
-            $table->string('username', 255)->unique();
+            $table->string('name', 255)->unique();
             $table->string('password', 255);
-
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

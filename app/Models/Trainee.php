@@ -2,18 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Trainee extends UuidModel
+class Trainee extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasUuids, Notifiable;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'email',
-        'username',
-        'password'
+        'name',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 
     /**

@@ -21,14 +21,9 @@ class TraineeSeeder extends Seeder
     {
         $this->truncate('trainees');
 
-        $bar = $this->command->getOutput()->createProgressBar(self::TRAINEE_QUANTITY);
-        $bar->start();
         for ($i = 0; $i < self::TRAINEE_QUANTITY; $i++) {
             Trainee::factory()
                 ->create();
-            $bar->advance();
         }
-        $bar->finish();
-        $this->command->getOutput()->newLine();
     }
 }

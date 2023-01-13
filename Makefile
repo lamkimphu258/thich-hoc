@@ -51,7 +51,7 @@ admin:
 	$(SAIL) artisan make:filament-user -n --name=$(ADMIN_NAME) --email=$(ADMIN_EMAIL) --password=$(ADMIN_PASSWORD)
 
 init:
-	migrate && admin && seed
+	$(MAKE) migrate && $(MAKE) admin && $(MAKE) seed
 
 test-workflow:
 	act push --secret-file ../secret/thich_hoc.secrets
