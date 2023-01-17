@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (!is_null(auth('trainee')->user())) {
+        return redirect('/dashboard');
+    }
+
     return view('welcome');
 })->name('welcome');
 
