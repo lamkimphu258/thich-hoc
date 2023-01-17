@@ -17,7 +17,7 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $title = fake()->unique()->realText(100);
+        $title = fake()->unique()->realText(60);
 
         return [
             'title' => $title,

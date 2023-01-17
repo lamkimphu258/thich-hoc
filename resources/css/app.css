@@ -4,6 +4,42 @@
 @tailwind components;
 @tailwind utilities;
 
-h1.font-pacifico {
-    font-family: "Pacifico", cursive;
+@layer base {
+    body {
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply font-bold py-2 px-4 rounded-full text-white
+    }
+
+    .btn-primary {
+        @apply bg-indigo-500 hover:bg-violet-700
+    }
+
+    .footer {
+        @apply text-center
+    }
+
+    .main {
+        @apply text-center text-black
+    }
+
+    .card-container {
+        @apply flex justify-start flex-wrap
+    }
+
+    .card {
+        @apply flex flex-col justify-start p-6 rounded-lg shadow-lg bg-white max-w-sm mb-6 mr-2
+    }
+
+    .card-img {
+        @apply mb-4 rounded w-96 h-40
+    }
 }

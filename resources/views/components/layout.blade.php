@@ -12,11 +12,10 @@
 
 <body>
     <header>
-        <livewire:navbar/>
+        <livewire:navbar />
     </header>
-    <main>{{ $slot }}</main>
+    <main class="main">{{ $slot }}</main>
     <footer></footer>
-
     @livewireScripts
 </body>
 

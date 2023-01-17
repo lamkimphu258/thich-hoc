@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
 use App\Models\Course;
-use App\Utils\TagUtil;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -30,6 +30,8 @@ class CourseResource extends Resource
                     ->required(),
                 TextInput::make('description')
                     ->required(),
+                FileUpload::make('thumbnail'),
+
                 Select::make('course_tags')
                     ->multiple()
                     ->relationship('tags', 'name'),
@@ -57,7 +59,7 @@ class CourseResource extends Resource
             ->filters([
                 SelectFilter::make('tags')
                     ->multiple()
-                    ->relationship('tags', 'name')
+                    ->relationship('tags', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
