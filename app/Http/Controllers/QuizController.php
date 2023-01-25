@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class QuizController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View|Factory
+    public function index()
     {
-        $latestCourse = Course::orderBy('created_at', 'desc');
-
-        return view('courses.index', [
-            'courses' => $latestCourse->paginate(25),
-        ]);
+        //
     }
 
     /**
@@ -28,7 +23,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(): void
+    public function create()
     {
         //
     }
@@ -47,26 +42,21 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Course $course, Quiz $quiz)
     {
-        $quizzes = $course->quizzes;
-
-        return view('courses.show', [
-            'course' => $course,
-            'quizzes' => $quizzes,
-        ]);
+        dd($course, $quiz);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Quiz $quiz)
     {
         //
     }
@@ -75,10 +65,10 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Quiz $quiz)
     {
         //
     }
@@ -86,10 +76,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course): void
+    public function destroy(Quiz $quiz)
     {
         //
     }

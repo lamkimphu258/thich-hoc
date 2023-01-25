@@ -13,6 +13,7 @@ class Course extends UuidModel
     protected $fillable = [
         'title',
         'description',
+        'thumbnail',
     ];
 
     /**

@@ -20,6 +20,8 @@ class CourseSeeder extends Seeder
         $this->truncate('courses');
         Course::factory()
             ->count(10)
-            ->create();
+            ->create([
+                'thumbnail' => '/thumbnails/placeholder.png',
+            ]);
     }
 }

@@ -24,7 +24,7 @@ class QuizSeeder extends Seeder
             EnrollmentSeeder::class,
         ]);
 
-        $courses = Course::all();
+        $courses = Course::all()->take(5);
 
         foreach ($courses as $course) {
             Quiz::factory()->count(10)->create([

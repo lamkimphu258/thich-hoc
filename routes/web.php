@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +25,14 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::middleware(['auth:trainee', 'verified'])->group(function () {
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::get('/courses/{course:slug}', [CourseController::class, 'show'])->name('courses.show');
+    Route::prefix('courses')->group(function () {
+        Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+        Route::get('/{course:slug}', [CourseController::class, 'show'])->name('courses.show');
+
+        Route::prefix('/{course:slug}/quizzes')->group(function () {
+            Route::get('/{quiz:slug}', [QuizController::class, 'show'])->name('quizzes.show');
+        });
+    });
 });
 
 Route::get('/dashboard', function () {

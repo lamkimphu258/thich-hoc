@@ -10,7 +10,7 @@ class TraineeSeeder extends Seeder
 {
     use HasTruncate;
 
-    const TRAINEE_QUANTITY = 10_000;
+    const TRAINEE_QUANTITY = 1_000;
 
     /**
      * Run the database seeds.
@@ -21,9 +21,8 @@ class TraineeSeeder extends Seeder
     {
         $this->truncate('trainees');
 
-        for ($i = 0; $i < self::TRAINEE_QUANTITY; $i++) {
-            Trainee::factory()
-                ->create();
-        }
+        Trainee::factory()
+            ->count(self::TRAINEE_QUANTITY)
+            ->create();
     }
 }

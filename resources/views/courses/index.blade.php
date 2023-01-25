@@ -10,7 +10,7 @@
       <div class="card-container overflow-hidden">
         @foreach ($courses as $course)
         <div class="card">
-          <img src="https://via.placeholder.com/250x150" class="card-img" />
+          <img src="{{ Vite::asset('resources/images/brand.png') }}" class="card-img" alt="Course thumbnail" loading="lazy" />
           <a href="{{ route('courses.show', ['course' => $course->slug]) }}">{{ __($course->title) }}</a>
         </div>
         @endforeach

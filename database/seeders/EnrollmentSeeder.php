@@ -27,16 +27,14 @@ class EnrollmentSeeder extends Seeder
         ]);
 
         $trainees = Trainee::all();
-        $courses = Course::all();
+        $courses = Course::all()->shuffle()->take(random_int(1, 2));
 
         foreach ($trainees as $trainee) {
             foreach ($courses as $course) {
-                if (random_int(0, 1)) {
-                    Enrollment::factory()->create([
-                        'trainee_id' => $trainee->id,
-                        'course_id' => $course->id
-                    ]);
-                }
+                Enrollment::factory()->create([
+                    'trainee_id' => $trainee->id,
+                    'course_id' => $course->id
+                ]);
             }
         }
     }
