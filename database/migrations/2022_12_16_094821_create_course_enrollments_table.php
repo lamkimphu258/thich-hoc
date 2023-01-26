@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('course_enrollments', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('trainee_id');
             $table->uuid('course_id');
 
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
 
-            $table->primary(['trainee_id', 'course_id']);
             $table->foreign('trainee_id')->references('id')->on('trainees')->cascadeOnDelete();
             $table->foreign('course_id')->references('id')->on('courses')->cascadeOnDelete();
         });

@@ -22,6 +22,7 @@ class TraineeSeeder extends Seeder
         $this->truncate('trainees');
 
         Trainee::factory()
+            ->verified()
             ->count(self::TRAINEE_QUANTITY)
             ->create();
     }

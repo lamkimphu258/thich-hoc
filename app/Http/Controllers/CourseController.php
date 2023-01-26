@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseEnrollment;
+use App\Models\QuizEnrollment;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -17,31 +19,16 @@ class CourseController extends Controller
     public function index(): View|Factory
     {
         $latestCourse = Course::orderBy('created_at', 'desc');
+        $courseEnrollments = CourseEnrollment::where([
+            'trainee_id' => auth()->user()->id,
+        ])
+            ->whereIn('course_id', $latestCourse->get()->pluck('id'))
+            ->pluck('course_id');
 
         return view('courses.index', [
             'courses' => $latestCourse->paginate(25),
+            'courseEnrollments' => $courseEnrollments,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(): void
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -53,44 +40,17 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $quizzes = $course->quizzes;
+        $quizzIds = $course->quizzes()->orderBy('created_at', 'desc')->pluck('quizzes.id')->all();
+        $quizEnrollments = QuizEnrollment::select('quiz_id')
+            ->where('trainee_id', auth()->user()->id)
+            ->whereNotNull('finished_at')
+            ->whereIn('quiz_id', $quizzIds)->get()
+            ->pluck('quiz_id');
 
         return view('courses.show', [
             'course' => $course,
             'quizzes' => $quizzes,
+            'quizEnrollments' => $quizEnrollments,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Course $course)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Course $course)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Course $course): void
-    {
-        //
     }
 }

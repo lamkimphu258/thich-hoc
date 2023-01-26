@@ -10,8 +10,13 @@
       <div class="card-container overflow-hidden">
         @foreach ($courses as $course)
         <div class="card">
-          <img src="{{ Vite::asset('resources/images/brand.png') }}" class="card-img" alt="Course thumbnail" loading="lazy" />
-          <a href="{{ route('courses.show', ['course' => $course->slug]) }}">{{ __($course->title) }}</a>
+          <img src="{{ url('storage/'.$course->thumbnail) }}" class="card-img" alt="Course thumbnail" loading="lazy" />
+          <a href="{{ route('courses.show', ['course' => $course->slug]) }}">
+            {{ __($course->title) }}
+            @if ($courseEnrollments->contains($course->id))
+            <x-heroicon-o-check class="w-8 h-8 text-green-500 inline" />
+            @endif
+          </a>
         </div>
         @endforeach
       </div>

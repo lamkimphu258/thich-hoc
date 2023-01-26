@@ -16,20 +16,24 @@ class QuizSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->truncate('quizzes');
 
         $this->call([
-            EnrollmentSeeder::class,
+            CourseEnrollmentSeeder::class,
         ]);
 
         $courses = Course::all()->take(5);
 
         foreach ($courses as $course) {
-            Quiz::factory()->count(10)->create([
+            Quiz::factory()->count(2)->create([
                 'course_id' => $course->id
             ]);
         }
+
+        $this->call([
+            QuizEnrollmentSeeder::class,
+        ]);
     }
 }

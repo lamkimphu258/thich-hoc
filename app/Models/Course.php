@@ -21,7 +21,7 @@ class Course extends UuidModel
      */
     public function trainees(): BelongsToMany
     {
-        return $this->belongsToMany(Trainee::class, 'enrollments');
+        return $this->belongsToMany(Trainee::class, 'course_enrollments');
     }
 
     /**

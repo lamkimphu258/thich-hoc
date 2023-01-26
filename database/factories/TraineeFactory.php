@@ -24,4 +24,15 @@ class TraineeFactory extends Factory
             'created_at' => Carbon::parse(Carbon::now()->subDay(fake()->numberBetween(0, 900))),
         ];
     }
+    /**
+     * @return TraineeFactory
+     */
+    public function verified(): TraineeFactory
+    {
+        return $this->state(function () {
+            return [
+                'email_verified_at' => now(),
+            ];
+        });
+    }
 }

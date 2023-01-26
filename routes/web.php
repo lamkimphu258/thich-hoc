@@ -31,6 +31,7 @@ Route::middleware(['auth:trainee', 'verified'])->group(function () {
 
         Route::prefix('/{course:slug}/quizzes')->group(function () {
             Route::get('/{quiz:slug}', [QuizController::class, 'show'])->name('quizzes.show');
+            Route::post('/{quiz:slug}/submitAnswers', [QuizController::class, 'submitAnswers'])->name('quizzes.submitAnswers');
         });
     });
 });

@@ -14,10 +14,22 @@ class AnswerFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'answer' => fake()->realText(100),
         ];
+    }
+
+    /**
+     * @return AnswerFactory
+     */
+    public function markCorrect(): AnswerFactory
+    {
+        return $this->state(function () {
+            return [
+                'is_correct' => true,
+            ];
+        });
     }
 }

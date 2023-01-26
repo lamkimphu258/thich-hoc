@@ -21,7 +21,7 @@ class CourseSeeder extends Seeder
         Course::factory()
             ->count(10)
             ->create([
-                'thumbnail' => '/thumbnails/placeholder.png',
+                'thumbnail' => 'thumbnails/placeholder.png',
             ]);
     }
 }

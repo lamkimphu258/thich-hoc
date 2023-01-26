@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('question_id')->nullable();
             $table->string('answer', 1000);
+            $table->boolean('is_correct')->default(false);
 
             $table->timestamps();
 

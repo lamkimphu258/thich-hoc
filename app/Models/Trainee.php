@@ -36,6 +36,6 @@ class Trainee extends Authenticatable implements MustVerifyEmail
      */
     public function courses(): BelongsToMany
     {
-        return $this->belongsToMany(Course::class, 'enrollments');
+        return $this->belongsToMany(Course::class, 'course_enrollments');
     }
 }

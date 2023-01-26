@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Enrollment>
  */
-class EnrollmentFactory extends Factory
+class CourseEnrollmentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,7 +16,6 @@ class EnrollmentFactory extends Factory
      */
     public function definition()
     {
-        return [
-        ];
+        return [];
     }
 }

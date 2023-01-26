@@ -25,10 +25,15 @@ class AnswerSeeder extends Seeder
             QuestionSeeder::class,
         ]);
 
-        $numberOfAnswers = [2, 3, 4];
+        $numberOfAnswers = [2, 3];
         Question::all()->each(function ($question) use ($numberOfAnswers) {
             Answer::factory()
                 ->count(Arr::random($numberOfAnswers))
+                ->create([
+                    'question_id' => $question->id,
+                ]);
+            Answer::factory()
+                ->markCorrect()
                 ->create([
                     'question_id' => $question->id,
                 ]);

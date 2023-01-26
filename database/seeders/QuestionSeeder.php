@@ -26,7 +26,7 @@ class QuestionSeeder extends Seeder
 
         Quiz::all()->each(function ($quizz) {
             Question::factory()
-                ->count(10)
+                ->count(3)
                 ->create([
                     'quiz_id' => $quizz->id,
                 ]);
