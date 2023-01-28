@@ -4,12 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AnswerResource\Pages;
 use App\Models\Answer;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class AnswerResource extends Resource
@@ -29,6 +31,7 @@ class AnswerResource extends Resource
                 Select::make('question')
                     ->relationship('question', 'question')
                     ->searchable(),
+                Checkbox::make('is_correct'),
             ]);
     }
 
@@ -38,10 +41,12 @@ class AnswerResource extends Resource
             ->columns([
                 TextColumn::make('answer')
                     ->sortable()
+                    ->limit(20)
                     ->searchable(),
                 TextColumn::make('question.question')
                     ->limit(20)
                     ->sortable(),
+                BooleanColumn::make('is_correct'),
             ])
             ->filters([
                 //

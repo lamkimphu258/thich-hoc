@@ -8,8 +8,13 @@ class Answer extends UuidModel
 {
     use HasFactory;
 
+    protected $casts = [
+        'is_correct' => 'boolean',
+    ];
+
     protected $fillable = [
         'answer',
+        'is_correct',
     ];
 
     public function question()
