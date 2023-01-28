@@ -45,7 +45,7 @@ RUN composer install --optimize-autoloader --no-interaction --no-progress --no-d
 
 FROM alpine:3.16
 
-COPY --from=builder /src /var/www/html
+COPY --from=builder /src /var/www/html/beta.thichhoc.com
 
 # Set env for opcache
 ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0" \
@@ -53,7 +53,7 @@ ENV PHP_OPCACHE_VALIDATE_TIMESTAMPS="0" \
     PHP_OPCACHE_MEMORY_CONSUMPTION="192" \
     PHP_OPCACHE_MAX_WASTED_PERCENTAGE="10" 
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/beta.thichhoc.com
 
 RUN apk add --no-cache \
   curl \
@@ -90,7 +90,7 @@ COPY docker/php/php.ini /etc/php81/conf.d/custom.ini
 COPY docker/php/opcache.ini /etc/php81/conf.d/opcache.ini
 COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
+RUN chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/nginx
 USER nobody
 
 EXPOSE 80

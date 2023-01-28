@@ -2,9 +2,10 @@ version: "3"
 services:
   app:
     # build:
-    #   context: .
-    #   dockerfile: Dockerfile.production
+      # context: .
+      # dockerfile: Dockerfile
     image: ghcr.io/lamkimphu258/thich-hoc:latest
+    # image: thich-hoc.prod:latest
     container_name: thich-hoc-app
     environment:
       APP_NAME: "my production"
@@ -22,4 +23,25 @@ services:
       retries: 3
       timeout: 10s
     volumes:
-      - ".env:/var/www/html/.env"
+      - .env:/var/www/html/.env
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./docker/nginx/dhparam:/etc/ssl/certs
+      - web-root:/var/www/nginx/html
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/usr/share/nginx/html
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/beta.${NGINX_HOST} --email ${CERT_EMAIL} --agree-tos --no-eff-email --staging -d beta.${NGINX_HOST}
+    depends_on:
+      - app
+
+volumes: 
+  certbot-etc:
+  certbot-var:
+  web-root:
+

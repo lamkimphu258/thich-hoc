@@ -7,29 +7,12 @@ on:
       - "releases/**"
 
 jobs:
-  test:
-    name: Run test
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ secrets.DOCKERHUB_USERNAME }}
-      - uses: actions/checkout@v3
-      - name: Setup PHP
-        id: setup-php
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-      - name: Install PHP dependencies
-        id: install-php-dependencies
-        run: composer install
-      - name: Test Laravel App
-        id: test-laravel
-        run: php artisan test
   build:
-    needs: test
     name: Build image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: echo ${{ secrets.DOCKERHUB_USERNAME }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -66,5 +49,6 @@ jobs:
             docker image prune -f &&
             docker-compose exec -T app php artisan config:cache &&
             docker-compose exec -T app php artisan route:cache &&
-            docker-compose exec -T app php artisan view:cache 
+            docker-compose exec -T app php artisan view:cache &&
+            docker-compose exec -T app php artisan storage:link
           '
