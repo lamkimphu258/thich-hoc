@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\QuestionResource\Pages;
 use App\Models\Question;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Resources\Form;
@@ -34,7 +35,8 @@ class QuestionResource extends Resource
                 Repeater::make('answers')
                     ->relationship()
                     ->schema([
-                        TextInput::make('answer')
+                        TextInput::make('answer'),
+                        Checkbox::make('is_correct')
                     ]),
             ]);
     }
@@ -52,6 +54,7 @@ class QuestionResource extends Resource
                     ->counts('answers')
                     ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
