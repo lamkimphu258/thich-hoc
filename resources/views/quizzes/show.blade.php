@@ -20,7 +20,7 @@
         @endif
         <div>
           <p class="question @error($question->id) text-red-500 @enderror">
-            <b>{!! __($question->question) !!}</b>
+            <b class="text-xl">{!! __($question->question) !!}</b>
           </p>
           @foreach ($question->answers->shuffle() as $answer)
           <input id="{{ $answer->id }}" type="radio" class="mr-2" value="{{ $answer->id }}" name="{{ $question->id }}" {{ old($question->id) === $answer->id ? "checked" : "" }} />

@@ -9,6 +9,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
         <div class="post">
+          @if (session('quiz-notification'))
+          <div class="alert alert-success" role="alert">
+            <span class="">{{ session('quiz-notification') }}</span>
+          </div>
+          @endif
           <h1 class="post-title">{{ __($course->title) }}</h1>
           <img src="{{ url('storage/'.$course->thumbnail) }}" alt="Course thumbnail" class="w-full h-[600px]" />
           <x-horizontal-line />

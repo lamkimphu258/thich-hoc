@@ -64,10 +64,14 @@
     }
 
     .alert {
-        @apply p-4 mb-4 text-xl rounded-lg
+        @apply p-4 mb-4 rounded-lg
     }
 
     .alert-danger {
         @apply text-red-800 bg-red-50 
+    }
+
+    .alert-success {
+        @apply text-green-800 bg-green-50
     }
 }
