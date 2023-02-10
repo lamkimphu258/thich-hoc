@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "arielmejiadev/larapex-charts": "^5.2",
         "aws/aws-sdk-php": "^3.258",
         "filament/filament": "^2.0",
         "flowframe/laravel-trend": "^0.1.1",

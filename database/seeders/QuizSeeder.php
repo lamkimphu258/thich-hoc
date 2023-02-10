@@ -27,7 +27,7 @@ class QuizSeeder extends Seeder
         $courses = Course::all()->take(5);
 
         foreach ($courses as $course) {
-            Quiz::factory()->count(2)->create([
+            Quiz::factory()->count(5)->create([
                 'course_id' => $course->id
             ]);
         }
