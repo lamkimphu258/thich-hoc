@@ -7,7 +7,6 @@ use App\Models\CourseEnrollment;
 use App\Models\QuizEnrollment;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -19,15 +18,20 @@ class CourseController extends Controller
     public function index(): View|Factory
     {
         $latestCourse = Course::orderBy('created_at', 'desc');
-        $courseEnrollments = CourseEnrollment::where([
-            'trainee_id' => auth()->user()->id,
-        ])
-            ->whereIn('course_id', $latestCourse->get()->pluck('id'))
-            ->pluck('course_id');
+        $percents = [];
+        $latestCourse->each(function ($course) use (&$percents) {
+            $totalQuizzesOfCourse = $course->quizzes()->count();
+            $nbOfQuizEnrollment = QuizEnrollment::where([
+                'course_id' => $course->id,
+                'trainee_id' => auth('trainee')->user()->id,
+            ])->count('id');
+
+            $percents[] = $totalQuizzesOfCourse === 0 || $nbOfQuizEnrollment === 0 ? 0 : (($nbOfQuizEnrollment / $totalQuizzesOfCourse) * 100);
+        });
 
         return view('courses.index', [
             'courses' => $latestCourse->paginate(25),
-            'courseEnrollments' => $courseEnrollments,
+            'percents' => $percents,
         ]);
     }
 

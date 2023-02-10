@@ -47,7 +47,7 @@ class QuizController extends Controller
         }
 
         if (empty($errors)) {
-            $quizEnrollment = QuizEnrollment::find([
+            $quizEnrollment = QuizEnrollment::where([
                 'quiz_id' => $quiz->id,
                 'course_id' => $course->id,
                 'trainee_id' => auth('trainee')->user()->id,

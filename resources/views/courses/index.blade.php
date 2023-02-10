@@ -8,14 +8,12 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="card-container overflow-hidden">
-        @foreach ($courses as $course)
+        @foreach ($courses as $index=>$course)
         <div class="card">
           <img src="{{ url('storage/'.$course->thumbnail) }}" class="card-img" alt="Course thumbnail" loading="lazy" />
           <a href="{{ route('courses.show', ['course' => $course->slug]) }}">
-            {{ __($course->title) }}
-            @if ($courseEnrollments->contains($course->id))
-            <x-heroicon-o-check class="w-8 h-8 text-green-500 inline" />
-            @endif
+            <div class="mb-4">{{ __($course->title) }}</div>
+            <x-progress-bar :percent="$percents[$index]" />
           </a>
         </div>
         @endforeach
