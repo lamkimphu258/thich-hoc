@@ -51,9 +51,9 @@ class QuizController extends Controller
                 'quiz_id' => $quiz->id,
                 'course_id' => $course->id,
                 'trainee_id' => auth('trainee')->user()->id,
-            ]);
+            ])->count();
 
-            if (is_null($quizEnrollment)) {
+            if ($quizEnrollment === 0) {
                 $enrollment = new QuizEnrollment();
                 $enrollment->quiz_id = $quiz->id;
                 $enrollment->course_id = $course->id;
