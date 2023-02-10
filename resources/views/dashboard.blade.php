@@ -1,31 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <x-slot:title>
+        Dashboard
+        </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm sm:rounded-lg p-4">
-                <div class="flex justify-between">
-                    <div class="w-5/12">
-                        {!! $courseChart->container() !!}
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
 
-                        <script src="{{ $courseChart->cdn() }}"></script>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white shadow-sm sm:rounded-lg p-4">
+                    <div class="flex justify-between">
+                        <div class="w-5/12">
+                            {!! $courseChart->container() !!}
 
-                        {{ $courseChart->script() }}
-                    </div>
+                            <script src="{{ $courseChart->cdn() }}"></script>
 
-                    <div class="w-5/12">
-                        {!! $quizChart->container() !!}
+                            {{ $courseChart->script() }}
+                        </div>
 
-                        <script src="{{ $quizChart->cdn() }}"></script>
+                        <div class="w-5/12">
+                            {!! $quizChart->container() !!}
 
-                        {{ $quizChart->script() }}
+                            <script src="{{ $quizChart->cdn() }}"></script>
+
+                            {{ $quizChart->script() }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
