@@ -105,7 +105,7 @@ return [
             'provider' => 'trainees',
             'table' => 'trainee_password_resets',
             'expire' => 60,
-            'throttle' => 60,
+            'throttle' => 3600,
         ],
 
     ],

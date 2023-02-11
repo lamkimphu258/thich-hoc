@@ -36,9 +36,14 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
+        $errorMsg = __($status);
+        if ($status === Password::RESET_THROTTLED) {
+            $errorMsg = 'You must wait 1 hour to retry again';
+        }
+
         return $status == Password::RESET_LINK_SENT
             ? back()->with('status', __($status))
             : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+            ->withErrors(['email' => $errorMsg]);
     }
 }
