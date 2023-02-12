@@ -31,7 +31,7 @@ class CourseResource extends Resource
                 TextInput::make('description')
                     ->required(),
                 FileUpload::make('thumbnail')
-                    ->directory('/thumbnails'),
+                    ->directory('/uploads/course_thumbnails'),
                 Select::make('course_tags')
                     ->multiple()
                     ->relationship('tags', 'name'),

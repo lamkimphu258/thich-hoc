@@ -23,8 +23,12 @@ This is open source of website www.thichhoc.com. Feel free to ask me a question 
 -   [x] Add logout
 -   [x] Add profile page
 -   [x] Check image from resources instead of public folder
--   [ ] Add course list page
--   [ ] Add course detail page: have list all quiz belongs to course
--   [ ] Add quiz list page
--   [ ] Add quiz detail page: have list of all question belongs to quiz, user can do quiz in here
+-   [x] Add course list page
+-   [x] Add course detail page: have list all quiz belongs to course
+-   [x] Add quiz list page
+-   [x] Add quiz detail page: have list of all question belongs to quiz, user can do quiz in here
 -   [ ] Check responsive
+
+# Issues
+
+-   Currently cannot use github actions reusable workflow cause nektos/act have not supported it yet. Consider to use it later when it is available or can change to use it when workflow is good.

@@ -54,4 +54,4 @@ init:
 	$(MAKE) migrate && $(MAKE) admin && $(MAKE) seed
 
 test-workflow:
-	act push --secret-file ../secret/thich_hoc.secrets
+	act push --secret-file ../secret/thich_hoc.secrets --artifact-server-path /tmp/artifacts

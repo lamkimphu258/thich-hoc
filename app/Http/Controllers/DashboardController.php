@@ -10,20 +10,20 @@ class DashboardController extends Controller
 {
     public function show()
     {
-        $nbOfComplementCourse = auth('trainee')->user()->courses()->count();
-        $nbOfComplementQuiz = auth('trainee')->user()->quizzes()->count();
+        $nbOfCompletedCourse = auth('trainee')->user()->courses()->count();
+        $nbOfCompletedQuiz = auth('trainee')->user()->quizzes()->count();
         $totalCourses = Course::all()->count();
         $totalQuizzes = Quiz::all()->count();
         $defaultColors = ['#6D28D9', '#BEBEBE'];
         $defaultLabels = ['Completed', 'Total'];
 
         $courseChart = (new LarapexChart)->setTitle('Completed Courses')
-            ->setDataset([$nbOfComplementCourse, $totalCourses])
+            ->setDataset([$nbOfCompletedCourse, $totalCourses - $nbOfCompletedCourse])
             ->setLabels($defaultLabels)
             ->setColors($defaultColors);
 
         $quizChart = (new LarapexChart)->setTitle('Completed Quizzes')
-            ->setDataset([$nbOfComplementQuiz, $totalQuizzes])
+            ->setDataset([$nbOfCompletedQuiz, $totalQuizzes - $nbOfCompletedQuiz])
             ->setLabels($defaultLabels)
             ->setColors($defaultColors);
 

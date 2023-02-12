@@ -24,6 +24,7 @@ class TraineeFactory extends Factory
             'created_at' => Carbon::parse(Carbon::now()->subDay(fake()->numberBetween(0, 900))),
         ];
     }
+
     /**
      * @return TraineeFactory
      */

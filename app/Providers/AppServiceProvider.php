@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        if (Str::contains(env('APP_ENV'), ['production', 'stage'])) {
+            URL::forceScheme('https');
+        }
     }
 }
