@@ -55,7 +55,6 @@ class TraineeResource extends Resource
                     ->counts('courses'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
