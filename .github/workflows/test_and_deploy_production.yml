@@ -44,7 +44,7 @@ jobs:
 
   deploy-dev:
     needs: test
-    name: Deploy to Stage
+    name: Deploy to Production
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -57,5 +57,5 @@ jobs:
           branch: main
           ci_branch_name: ${{ github.GITHUB_REF_NAME }}
           git_push_flags: "--force"
-          git_remote_url: ssh://dokku@${{ secrets.IP_ADDRESS }}:22/stage
+          git_remote_url: ssh://dokku@${{ secrets.IP_ADDRESS }}:22/www
           ssh_private_key: ${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}
