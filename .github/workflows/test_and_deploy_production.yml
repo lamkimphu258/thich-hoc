@@ -1,0 +1,64 @@
+name: Test and deploy to prod
+run-name: Test and deploy prod
+on:
+  push:
+    branches:
+      - main
+  pull-request:
+    branches:
+      - "releases/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    name: Run test
+    steps:
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.24.0
+        with:
+          php-version: "8.1"
+          coverage: pcov
+          extensions: zip tidy
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+      - name: Create database
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+      - name: Create artifact folder
+        run: mkdir -p tmp/artifacts
+      - name: Execute tests (Unit and coverage)
+        id: run-test
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: php artisan test --testsuite=Unit --coverage-html /tmp/artifacts/coverage_report/
+      - uses: actions/upload-artifact@v3
+        if: steps.run-test.outcome == 'success'
+        with:
+          name: test-coverage
+          path: /tmp/artifacts/coverage_report/
+
+  deploy-dev:
+    needs: test
+    name: Deploy to Stage
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Dokku
+        uses: dokku/github-action@v1.4.0
+        with:
+          branch: main
+          ci_branch_name: ${{ github.GITHUB_REF_NAME }}
+          git_push_flags: "--force"
+          git_remote_url: ssh://dokku@${{ secrets.IP_ADDRESS }}:22/stage
+          ssh_private_key: ${{ secrets.DEPLOYER_SSH_PRIVATE_KEY }}
