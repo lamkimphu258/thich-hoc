@@ -127,6 +127,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Additional env
+    |--------------------------------------------------------------------------
+    |
+    | Additional key to protect sensitive data 
+    |
+    */
+    'admin_email' => env('ADMIN_EMAIL', ''),
+
+    /*
+    |--------------------------------------------------------------------------
     | Maintenance Mode Driver
     |--------------------------------------------------------------------------
     |
@@ -194,7 +204,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
