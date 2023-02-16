@@ -53,5 +53,8 @@ admin:
 init:
 	$(MAKE) migrate && $(MAKE) admin && $(MAKE) seed
 
-test-workflow:
-	act push --secret-file ../secret/thich_hoc.secrets
+test-workflow-stage:
+	act push -W .github/workflows/test_and_deploy_stage.yml --secret-file ../secret/thich_hoc.secrets --artifact-server-path /tmp/artifacts
+
+test-workflow-prod:
+	act push -W .github/workflows/test_and_deploy_prod.yml --secret-file ../secret/thich_hoc.secrets --artifact-server-path /tmp/artifacts
