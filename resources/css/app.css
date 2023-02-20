@@ -16,11 +16,11 @@
 
 @layer components {
     .btn {
-        @apply font-bold py-2 px-4 rounded-full text-white cursor-pointer transition-colors hover:ease-in;
+        @apply font-bold py-2 px-4 rounded-md text-white cursor-pointer transition-colors hover:ease-in;
     }
 
     .btn-primary {
-        @apply bg-indigo-500 hover:bg-violet-700;
+        @apply bg-indigo-700 hover:bg-violet-500;
     }
 
     .footer {
