@@ -14,7 +14,7 @@
     <header>
         <livewire:navbar />
     </header>
-    <main class="main">{{ $slot }}</main>
+    <main class="main p-8">{{ $slot }}</main>
     <footer class="text-center p-4 text-gray-600">
         Copyright &copy; {{ now()->year }} Thich Hoc. All rights reversed.
     </footer>

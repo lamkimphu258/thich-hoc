@@ -1,5 +1,5 @@
-<a href="{{ $href }}">
-    <button class="btn btn-primary {{ $className }}">
+<button class="btn btn-primary {{ $className }}">
+    <a href="{{ $href }}" class="block">
         {{ $content ?? "Button"}}
-    </button>
-</a>
+    </a>
+</button>
