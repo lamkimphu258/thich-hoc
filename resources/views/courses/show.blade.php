@@ -19,8 +19,6 @@
             </div>
             @endif
             <h1 class="post-title">{{ __($course->title) }}</h1>
-            <img src="{{ url('storage/'.$course->thumbnail) }}" alt="Course thumbnail" class="w-full h-[600px]" />
-            <x-horizontal-line />
             <div>
               @if (count($quizzes) === 0)
               <p>This course have not had any quizzes yet! Please comeback later.</p>
