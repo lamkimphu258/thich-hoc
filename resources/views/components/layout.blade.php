@@ -19,7 +19,6 @@
         Copyright &copy; {{ now()->year }} Thich Hoc. All rights reversed.
     </footer>
     @livewireScripts
-    @vite(['resources/js/script.js'])
 </body>
 
 </html>
