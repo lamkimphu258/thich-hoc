@@ -30,8 +30,9 @@ class TraineeResource extends Resource
                     ->email()
                     ->unique()
                     ->required(),
-                TextInput::make('username')
+                TextInput::make('name')
                     ->unique()
+                    ->label('username')
                     ->required(),
                 TextInput::make('password')
                     ->password()
@@ -49,13 +50,14 @@ class TraineeResource extends Resource
                 TextColumn::make('email')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('username')
+                TextColumn::make('name')
+                    ->sortable(),
+                TextColumn::make('email_verified_at')
                     ->sortable(),
                 TextColumn::make('courses_count')
                     ->counts('courses'),
             ])
-            ->filters([
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
