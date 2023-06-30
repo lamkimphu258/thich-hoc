@@ -17,10 +17,10 @@ class CourseController extends Controller
      */
     public function index(): View|Factory
     {
-        $latestCourse = Course::orderBy('created_at', 'desc');
+        $latestCourse = Course::select('slug', 'title', 'thumbnail', 'description')->orderBy('created_at', 'desc');
         $percents = [];
         $latestCourse->each(function ($course) use (&$percents) {
-            $totalQuizzesOfCourse = $course->quizzes()->count();
+            $totalQuizzesOfCourse = $course->quizzes()->count('id');
             $nbOfQuizEnrollment = QuizEnrollment::where([
                 'course_id' => $course->id,
                 'trainee_id' => auth('trainee')->user()->id,
